@@ -177,7 +177,7 @@ sub weight {
 	return $weight."\n";
 }
 
-triggers query_clean => qr/[$valid]{6}/i;
+triggers query_lc => qr/^((dna|rna|protein|amino ?acid) )?[$valid]+$/i;
 	#Also, we could use some better regex examples
 
 handle query_clean => sub {
