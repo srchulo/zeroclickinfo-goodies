@@ -177,10 +177,11 @@ sub weight {
 	return $weight."\n";
 }
 
-triggers query_lc => qr/^((dna|rna|protein|amino ?acid) )?[$valid]+$/i;
+triggers query_raw => qr/^((dna|rna|protein|amino ?acid) )?[$valid]+$/i;
 	#Also, we could use some better regex examples
 
-handle query_clean => sub {
+handle query_raw => sub {
+	s/[^[::alnum::]]//g;
 	my $query = lc $_;	#query is now lower cased input, raw
 	my $sequence;
 	my $seq_type;		#What kind of sequence?
